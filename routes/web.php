@@ -18,8 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('task')->group(function () {
+Route::prefix('task')->middleware(['cors'])->group(function () {
     Route::get('getAll', [TaskController::class, 'getAll']);
     Route::get('getByID/{id}', [TaskController::class, 'getByID']);
     Route::post('addTask', [TaskController::class, 'addTask']);
+    Route::put('editTask/{id}', [TaskController::class, 'editTask']);
+    Route::delete('deleteTask/{id}', [TaskController::class, 'deleteTask']);
 });

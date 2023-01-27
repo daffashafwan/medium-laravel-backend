@@ -35,6 +35,26 @@ class TaskController extends Controller
    }
 
    public function editTask($id, Request $request){
-       $task -
+       $task = Tasks::find($id);
+       try {
+           $task->name = $request->name;
+           $task->description = $request->description;
+           $task->is_done = $request->is_done;
+           $task->due_date = $request->due_date;
+           $task->save();
+        return response()->json(['success' => 'true','message' => $task], 200);
+       } catch (\Throwable $th) {
+        return response()->json(['success' => 'false','message' => $task], 500);
+       }
+   }
+
+   public function deleteTask($id){
+       $task = Tasks::find($id);
+        try {
+            $task->delete();
+            return response()->json(['success' => 'true','message' => 'success delete task'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['success' => 'false','message' => $task], 500);
+        }
    }
 }
