@@ -21,4 +21,5 @@ Route::get('/', function () {
 Route::prefix('task')->group(function () {
     Route::get('getAll', [TaskController::class, 'getAll']);
     Route::get('getByID/{id}', [TaskController::class, 'getByID']);
+    Route::post('addTask', [TaskController::class, 'addTask']);
 });
